@@ -3,10 +3,10 @@ const AppError = require("../utils/AppError")
 
 class Tags {
     async show(request, response) {
-        const { id } = request.params
+        const user_id = request.user.id
 
         const tags = await knex("movie_tags")
-        .where("user_id", id)
+        .where({user_id})
         .orderBy("name")
 
         response.json(tags)
