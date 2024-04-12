@@ -13,7 +13,6 @@ class SessionsController {
         const user = await knex("users").where({ email }).first()
 
         // return console.log(user)
-
         if(!user){
             throw new AppError("E-mail e/ou senha incorretos", 401)
         }
@@ -27,7 +26,8 @@ class SessionsController {
         // adicionando o token a resposta da requisição
         const {secret, expiresIn} = authConfig.jwt
         const token = sign({}, secret, {
-            subject: String(user.id), expiresIn
+            subject: String(user.id), 
+            expiresIn
         })
 
         return response.json({ user, token })
