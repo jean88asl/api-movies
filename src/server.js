@@ -5,12 +5,13 @@ const database = require("./database/sqlite")
 const AppError = require("./utils/AppError")
 const uploadConfig = require("./configs/upload")
 
+const cors = require("cors")
 const express = require("express")
 
 const routes = require("./routes")
 
 const app = express()
-
+app.use(cors())
 // indicando que as respostas das requisições serão no formato json
 app.use(express.json())
 
