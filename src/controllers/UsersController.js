@@ -10,8 +10,9 @@ class UserController {
         const database = await sqliteConnection()
 
         const checkUserExist = await database.get("SELECT * FROM users WHERE email = (?)", [email])
+        const checkNameExist = await database.get("SELECT * FROM users WHERE name = (?)", [name])
 
-        if(checkUserExist) {
+        if(checkUserExist || checkNameExist) {
             throw new AppError("Este usuário já está cadastrado!")
         }
 
